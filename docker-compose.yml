@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  serving:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/root/project/data
+      - ./task1:/root/project/task1
+      - ./task2:/root/project/task2
+    command: tail -f /dev/null

@@ -1,0 +1,3 @@
+[submodule "example-repo"]
+	path = example-repo
+	url = git@github.com:kkaryl/AI6128-Urban_Computing.git
