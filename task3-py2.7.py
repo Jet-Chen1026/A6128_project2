@@ -43,16 +43,16 @@ factor = 1.5
 stmatch_config = STMATCHConfig(k, radius, gps_error, vmax, factor)
 
 ### Read trajectory data
-train1000 = []
+train1500 = []
 with open("./data/trajectory/train-1500.csv","r") as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
-        train1000.append(line[8]) # POLYLINES
+        train1500.append(line[8]) # POLYLINES
 
 ### Run map matching for wkt
 results = []
-for t_number in range(1,1001):
-    gps_points = eval(train1000[t_number])
+for t_number in range(1, 1501):
+    gps_points = eval(train1500[t_number])
     wkt = 'LINESTRING('+','.join([' '.join([str(j) for j in i]) for i in gps_points])+')'
     result = fmm_model.match_wkt(wkt, fmm_config)
     if list(result.cpath)==[]:
@@ -73,7 +73,7 @@ with open("./data/match_result.csv","w") as csvfile:
     writer.writerow(["t_number", "cpath", "opath", "offset", "length", "spdist", "mgeom"])
 
     write_list = []
-    for t_number in range(1000):
+    for t_number in range(1500):
         tr = results[t_number]
         write_list.append([t_number+1, tr['cpath'], tr['opath'], tr['offset'], tr['length'], tr['spdist'], tr['mgeom']])
     writer.writerows(write_list)
