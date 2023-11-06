@@ -1,6 +1,6 @@
 import os
 import json
-from fmm import Network, NetworkGraph, UBODTGenAlgorithm, UBODT, FastMapMatch, FastMapMatchConfig, STMATCH, STMATCHConfig
+from fmm import Network, NetworkGraph, UBODTGenAlgorithm, UBODT, FastMapMatch, FastMapMatchConfig
 
 ### Read network data
 place_name = "Porto, Portugal"
