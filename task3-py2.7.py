@@ -44,8 +44,8 @@ for i, trajectory in enumerate(train1500):
         "Matched_path": list(result.cpath),
         "Matched_edge_for_each_point": list(result.opath),
         "Matched_edge_index": list(result.indices),
-        "Matched_geometry": result.mgeom.export_wkt(),
-        "Matched_point": result.pgeom.export_wkt(),
+        "Matched_geometry": [[float(b) for b in a.split(' ')] for a in result.mgeom.export_wkt()[11:-1].split(',')] if len(result.mgeom.export_wkt()) > 12 else [],
+        "Matched_point": [[float(b) for b in a.split(' ')] for a in result.pgeom.export_wkt()[11:-1].split(',')] if len(result.pgeom.export_wkt()) > 12 else [],
         "Detailed_match_infromation": [
             {
                 "eid": c.edge_id,
