@@ -7,4 +7,5 @@ services:
     volumes:
       - ./data:/root/data
       - ./task3-py2.7.py:/root/task3-py2.7.py
+      - ./task3-GA-py2.7.py:/root/task3-GA-py2.7.py
     command: tail -f /dev/null
