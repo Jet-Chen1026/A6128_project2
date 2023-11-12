@@ -1,3 +1,4 @@
 osmnx
 folium
 matplotlib
+selenium

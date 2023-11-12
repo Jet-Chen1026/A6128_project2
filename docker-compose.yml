@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./data:/root/project/data
-      - ./task1:/root/project/task1
-      - ./task2:/root/project/task2
+      - ./data:/root/data
+      - ./task3-py2.7.py:/root/task3-py2.7.py
     command: tail -f /dev/null
