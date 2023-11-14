@@ -1,6 +1,6 @@
 import os
 import json
-from fmm import Network, NetworkGraph, UBODTGenAlgorithm, UBODT, FastMapMatch, FastMapMatchConfig
+from fmm import Network, NetworkGraph, UBODTGenAlgorithm, UBODT, FastMapMatch, FastMapMatchConfig, STMATCH, STMATCHConfig
 
 ### Read network data
 network = Network("./data/map/edges.shp", "fid", "u", "v")
@@ -30,6 +30,17 @@ radius = 0.005
 gps_error = 0.0005
 fmm_config = FastMapMatchConfig(k, radius, gps_error)
 
+### Create STMATCH model
+stmatch_model = STMATCH(network, graph)
+
+### Define map matching configurations
+k = 16
+radius = 0.05
+gps_error = 0.005
+vmax = 0.003
+factor = 1.5
+stmatch_config = STMATCHConfig(k, radius, gps_error, vmax, factor)
+
 ### Read trajectory data
 with open("./data/trajectory/train-1500.json", "r") as jsonfile:
     train1500 = json.load(jsonfile)
@@ -39,6 +50,13 @@ for i, trajectory in enumerate(train1500):
     polyline = trajectory['POLYLINE']
     wkt = 'LINESTRING('+','.join([' '.join([str(k) for k in j]) for j in polyline])+')'
     result = fmm_model.match_wkt(wkt, fmm_config)
+    train1500[i]['MAP_MATCHING_ALGORITHM'] = 'fmm'
+
+    if not list(result.cpath):
+        result = stmatch_model.match_wkt(wkt, stmatch_config)
+        train1500[i]['MAP_MATCHING_ALGORITHM'] = 'stmatch'
+        if not list(result.cpath):
+            print(i, wkt)
 
     train1500[i]["MATCHED_RESULTS"] = {
         "Matched_path": list(result.cpath),
