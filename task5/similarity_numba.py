@@ -4,7 +4,7 @@ import numba
 import numpy as np
 from scipy.spatial import distance
 from euclidian_cdist import eucl_opt
-import fastdist
+from fastdist import fastdist
 # from numba.np.extensions import cross2d
 # MIT License
 #
