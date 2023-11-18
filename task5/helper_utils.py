@@ -84,7 +84,7 @@ class MatchedRoutes:
         matched_point = swap_col(np.asarray(df['MATCHED_RESULTS']['Matched_point']).reshape(-1,2)) #lat,lon
         matched_geo = swap_col(np.asarray(df['MATCHED_RESULTS']['Matched_geometry']).reshape(-1,2)) #lat,lon
         
-        dt = (gps_time[-1]-gps_time[0])/matched_geo.shape[0] # type: ignore
+        dt = (gps_time[-1]-gps_time[0])/(matched_geo.shape[0]+1e-10) # type: ignore
         geo_time =  MatchedRoutes.get_time_array(df,n=matched_geo.shape[0],dt=dt)
         
         osmid_source = np.asarray([x['source'] for x in matched_info])

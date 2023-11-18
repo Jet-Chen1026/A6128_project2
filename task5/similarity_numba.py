@@ -858,7 +858,8 @@ def dtw(exp_data, num_data, metric='euclidean'):
 
     """
     # c = distance.cdist(exp_data, num_data, metric=metric, **kwargs)
-    c = eucl_opt(exp_data, num_data)
+    # c = eucl_opt(exp_data, num_data)
+    c = fastdist.matrix_to_matrix_distance(exp_data, num_data, fastdist.cityblock, "cityblock")
     d = np.zeros(c.shape)
     d[0, 0] = c[0, 0]
     n, m = c.shape
