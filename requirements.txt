@@ -1,4 +1,4 @@
-osmnx
-folium
-matplotlib
-selenium
+osmnx==1.7.0
+folium==0.14.0
+matplotlib==3.8.0
+selenium==4.15.2
